@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=https://youtu.be/7ij3VnRxm7k" />
-    <title>Redirecting...</title>
+    <meta charset="UTF-8" />
+    <title>유튜브로 이동 중...</title>
+    <meta http-equiv="refresh" content="2; url=https://youtu.be/7ij3VnRxm7k" />
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 50px;
+      }
+      iframe {
+        margin-top: 20px;
+        width: 90%;
+        max-width: 560px;
+        height: 315px;
+        border: none;
+      }
+    </style>
   </head>
   <body>
-    <p>유튜브로 이동 중입니다...</p>
+    <h2>유튜브로 자동 이동 중입니다...</h2>
+    <p>잠시만 기다려 주세요. 이동되지 않으면 아래 영상을 직접 재생하세요.</p>
+
+    <!-- 유튜브 임베드 백업 -->
+    <iframe src="https://youtu.be/7ij3VnRxm7k" allowfullscreen></iframe>
+
+    <!-- 수동 이동 버튼 -->
+    <p><a href="https://youtu.be/7ij3VnRxm7k" target="_blank">직접 보기</a></p>
   </body>
 </html>
