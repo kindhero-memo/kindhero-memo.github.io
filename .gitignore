@@ -1,0 +1,26 @@
+# OS 관련
+.DS_Store
+Thumbs.db
+
+# 에디터/IDE 관련
+.vscode/
+.idea/
+.vs/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js (만약 npm/yarn 사용 시)
+node_modules/
+package-lock.json
+yarn.lock
+
+# 로그 파일
+*.log
+
+# 빌드 결과물 (만약 빌드 툴 사용 시)
+dist/
+build/
+
+# 임시 파일
+*.tmp
+*.temp

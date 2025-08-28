@@ -1,40 +1,589 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>유튜브로 이동 중...</title>
-    <meta http-equiv="refresh" content="2; url=https://youtu.be/id" />
-    <style>
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        padding-top: 50px;
-      }
-      iframe {
-        margin-top: 20px;
-        width: 90%;
-        max-width: 560px;
-        height: 315px;
-        border: none;
-      }
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/c46829a8f8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/공통스타일.css">
+
+  <title>Battle Siege</title>
+  <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        #player {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 177.78vh; /* 16:9 비율을 위한 너비 */
+            height: 100vh;
+            min-width: 100vw;
+            min-height: 56.25vw;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .text-overlay {
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .text-overlay {
+                padding: 20px;
+                margin: 20px;
+            }
+        }
     </style>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VKC1CWLP59"></script>
+
+</head>
+<body>
+
+   <div class="video-background">
+        <div id="player"></div>
+    </div>
+    
+ <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+        
+        // 유튜브 API가 준비되면 호출되는 함수
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: 'WghVNdAEmYE', // 영상 ID만 입력 (URL 파라미터 제거)
+                playerVars: {
+                    'autoplay': 1,        // 자동재생
+                    'mute': 1,           // 음소거 (자동재생을 위해 필수)
+                    'loop': 1,           // 반복재생
+                    'controls': 0,       // 컨트롤 숨기기
+                    'showinfo': 0,       // 정보 표시 안함
+                    'rel': 0,            // 관련 동영상 표시 안함
+                    'iv_load_policy': 3, // 주석 표시 안함
+                    'modestbranding': 1, // 유튜브 로고 최소화
+                    'playsinline': 1,    // iOS에서 인라인 재생
+                    'start': 0,          // 시작 시간
+                    'playlist': 'WghVNdAEmYE' // 루프를 위한 플레이리스트 설정
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        // 플레이어가 준비되면 호출되는 함수
+        function onPlayerReady(event) {
+            event.target.mute();
+            event.target.playVideo();
+        }
+        
+        // 플레이어 상태가 변경되면 호출되는 함수
+        function onPlayerStateChange(event) {
+            // 영상이 끝나면 다시 재생 (루프 보장)
+            if (event.data === YT.PlayerState.ENDED) {
+                player.playVideo();
+            }
+        }
+        
+        // 페이지 로드 후 음소거 상태 확인 (브라우저 정책 대응)
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (player && player.isMuted && !player.isMuted()) {
+                    player.mute();
+                }
+            }, 1000);
+        });
+    </script>
+
+
+  <section id="main">
+
+    <!-- 로고 섹션 -->
+    <section class="logoSection">
+      <article class="logoArticle-wrap">
+        <div class="logo-wrap">
+            <img src="./img/logo.png" height="640" width="390" alt="logo">
+        </div>
+      </article>
+    </section>
+
+    <!-- 섹션 1 : AVAILABLE NOW -->
+    <section class="availableNow">
+      <article class="availableNow-wrap">
+        <div class="availableNow-back">
+          <h5 class="availableNow-subTitle">Coming in</h5>
+          <h2 class="availableNow-title">3Q 2026</h2>
+          <P class="availableNow-text">
+            <span class="availableNow-text-ko">"Master strategy, strike the battlefield."<br>
+            next-level strategy RPG!</span> <br>
+          </P>
+        </div>
+      </article>
+      <!--
+        <div class="steam-widget">
+           <iframe src="https://store.steampowered.com/widget/1603720/" frameborder="0" width="100%" height="190"></iframe>
+        </div> -->
+    </section>
+
+
+    <!-- 섹션 2 aboutGame -->
+    <section class="aboutGame">
+      <article class="aboutGame-wrap">
+        <h2 class="subTitleWithLine">ABOUT THIS GAME</h2>
+        <div class="section2Image-wrap">
+               <div class="carousel-container">
+        <div class="carousel-counter">
+            <span id="current">1</span> / <span id="total">5</span>
+        </div>
+        
+        <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide active">
+                <!--<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="산악 풍경">
+                -->
+                <img src="./img/sshot_1.png">
+                <div class="slide-content">
+                    <div class="slide-title">World Map</div>
+                    <div class="slide-description">Explore a world of hex tiles!</div>
+                </div>
+            </div>
+            
+            <div class="carousel-slide next">
+                <img src="./img/sshot_2.png">
+                <div class="slide-content">
+                    <div class="slide-title">Battle Prepare</div>
+                    <div class="slide-description">Place your units wisely and engage in combat!</div>
+                </div>
+            </div>
+            
+            <div class="carousel-slide hidden">
+                <img src="./img/sshot_3.png">
+                <div class="slide-content">
+                    <div class="slide-title">Encounter</div>
+                    <div class="slide-description">Meet events, make choices!</div>
+                </div>
+            </div>
+            
+            <div class="carousel-slide hidden">
+                <img src="./img/sshot_4.png">
+                <div class="slide-content">
+                    <div class="slide-title">Battle</div>
+                    <div class="slide-description">Join the fight and claim victory!</div>
+                </div>
+            </div>
+            
+            <div class="carousel-slide prev">
+                <img src="./img/sshot_5.png">
+                <div class="slide-content">
+                    <div class="slide-title">Grid Equipment</div>
+                    <div class="slide-description">Equip by placing gear efficiently on the grid!</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-nav prev-btn" onclick="prevSlide()">&#8249;</button>
+        <button class="carousel-nav next-btn" onclick="nextSlide()">&#8250;</button>
+        
+        <div class="carousel-indicators">
+            <div class="indicator active" onclick="goToSlide(0)"></div>
+            <div class="indicator" onclick="goToSlide(1)"></div>
+            <div class="indicator" onclick="goToSlide(2)"></div>
+            <div class="indicator" onclick="goToSlide(3)"></div>
+            <div class="indicator" onclick="goToSlide(4)"></div>
+        </div>
+    </div>
+
+        </div>
+
+        <p class="aboutGame-text">
+            A hybrid strategy RPG combining the deep progression of RPGs with the resource and territory expansion of SLGs. <br><br>
+            Experience high-freedom tilemap exploration, player-intervened auto-battles, and unit and skill customization!
+        </p>
+
+        <br>
+        
+        <p class="aboutGame-btn">
+            <a href="https://drive.google.com/drive/folders/1izwwUn0KRPbrIOf9bS81-GSRAi6SBjwJ?usp=sharing" target="_blank" rel="noopener noreferrer">
+        Press Kit Download
+      </a>
+      </p>
+      </article>
+    </section>
+    
+    
+    <!-- 섹션 Other video -->
+    <section class="otherVideoSection">
+      <article class="otherVideo-wrap">
+        <h2 class="subTitleWithLine">TRAILER</h2>
+        
+        <div class="otherVideoGrid-container">
+            <iframe width="1080" height="608" src="https://www.youtube.com/embed/EtBd31q5aXI" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+      </article>
+    </section>
+    
+
+    <!-- 섹션3 Play -->
+    <section class="gifPlaySection">-->
+
+      <section class="gifPlay-wrap">
+        <div class="gifPlay-item-wrap">
+            <div class="video-link" data-video-url="./movie/LandingMovie_1.mp4">
+                <video src="./movie/LandingMovie_1.mp4" muted autoplay loop preload="auto" class="lazy-video" playsinline></video>
+                <div class="loading-spinner" aria-hidden="true"></div>
+                <i class='bx bx-play-circle'></i>
+            </div>
+        </div>
+
+        <div class="gifPlay-text-wrap">
+          <h2>Tilemap and Quest System</h2>
+          <p>On a highly flexible world map built with tilemaps, you can enjoy limitless adventures through multi-directional branching paths and freely explore various routes. Every journey offers a unique strategic experience.</p>
+        </div>
+      </section>
+
+      <section class="gifPlay-wrap">
+        <div class="gifPlay-text-wrap">
+          <h2>Deployment Deck and Combat System</h2>
+          <p>Intervene whenever and wherever you want. Player-Centric Combat System — Strategic auto-battles with card skill intervention: Take direct control of battles using unit placement and card skills.</p>
+        </div>
+
+        <div class="gifPlay-item-wrap">
+            <div class="video-link" data-video-url="./movie/LandingMovie_2.mp4">
+                <video src="./movie/LandingMovie_2.mp4" muted autoplay loop preload="auto" class="lazy-video" playsinline></video>
+                <div class="loading-spinner" aria-hidden="true"></div>
+                <i class='bx bx-play-circle'></i>
+            </div>
+        </div>
+      </section>
+      
+      <section class="gifPlay-wrap">
+        <div class="gifPlay-item-wrap">
+            <div class="video-link" data-video-url="./movie/LandingMovie_3.mp4">
+                <video src="./movie/LandingMovie_3.mp4" muted autoplay loop preload="auto" class="lazy-video" playsinline></video>
+                <div class="loading-spinner" aria-hidden="true"></div>
+                <i class='bx bx-play-circle'></i>
+            </div>
+        </div>
+
+        <div class="gifPlay-text-wrap">
+          <h2>Camp and Progression System</h2>
+          <p>The central hub for account progression Integrated management of development and content unlocks — Growth your way: Freely choose the order of unlocking units, crafting, and dungeons as you expand your camp.</p>
+        </div>
+      </section>
+
+      <section class="gifPlay-wrap">
+        <div class="gifPlay-text-wrap">
+          <h2>Equip Inventory System</h2>
+          <p>A unique inventory system where placement itself is strategic — Battle performance changes based on item arrangement, offering strategic fun through repeated play to discover the optimal setup.</p>
+        </div>
+
+        <div class="gifPlay-item-wrap">
+            <div class="video-link" data-video-url="./movie/LandingMovie_4.mp4">
+            <video src="./movie/LandingMovie_4.mp4" muted autoplay loop preload="auto" class="lazy-video" playsinline></video>
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <i class='bx bx-play-circle'></i>
+        </div>
+      </section>
+
+      <section class="gifPlay-wrap">
+        <div class="gifPlay-item-wrap">
+            <div class="video-link" data-video-url="./movie/LandingMovie_5.mp4">
+                <video src="./movie/LandingMovie_5.mp4" muted autoplay loop preload="auto" class="lazy-video" playsinline></video>
+                <div class="loading-spinner" aria-hidden="true"></div>
+                <i class='bx bx-play-circle'></i>
+            </div>
+        </div>
+
+        <div class="gifPlay-text-wrap">
+          <h2>Diverse and Strategic Battle Maps</h2>
+          <p>With a variety of battle maps, players must devise and adapt new strategies at every moment. Sometimes, you can alter the terrain to gain the upper hand in battle.</p>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- 섹션4 -->
+    <section class="twitterSection">
+
+        <h2 class="subTitleWithLine_SNS">SNS</h2><br>
+
+        <div class="twitterDiv">
+        
+            <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-f6448762-3854-4937-af20-86f87d4b2fd4" data-elfsight-app-lazy></div>
+
+
+        </div>
+    </section>
+
+    <!-- 풋터 -->
+    <footer class="footer">
+
+      <ul class="footer-list">
+        <li class="footer-item">
+          <a href="https://x.com/_BattleSiege" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+          Twitter
+        </li>
+        <li class="footer-item">
+          <a href="https://www.instagram.com/_kindhero/" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          steam
+        </li>
+        <li class="footer-item">
+          <a href="mailto:"kindhero@kindhero.co.kr" target="_blank">
+            <i class="fas fa-envelope"></i>
+          </a>
+          mail
+        </li>
+      </ul>
+
+      <!-- copyright -->
+      <img src="./img/kindHero.png" class="kinHeroLogo">
+
+      <!-- copyright -->
+      <ul class="copy">
+        <li class="copy-item">
+          Copyright 2025- KindHero all rights reserved
+        </li>
+        <li class="copy-item">
+          Battle Siege
+        </li>
+      </ul>
+
+    </footer>
+    <!-- <div class="noneclick"></div> -->
+  </section>
+  <script src="./JS/script.js"></script>
+
+  <!-- 캐러셀 -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-VKC1CWLP59');
-</script>
-  </head>
-  <body>
-    <h2>유튜브로 자동 이동 중입니다...</h2>
-    <p>잠시만 기다려 주세요. 이동되지 않으면 아래 영상을 직접 재생하세요.</p>
+        let currentSlide = 0;
+        const totalSlides = 5;
+        let autoSlideInterval;
+        let isTransitioning = false;
 
-    <!-- 유튜브 임베드 백업 -->
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/id" frameborder="0" allowfullscreen></iframe>
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const currentCounter = document.getElementById('current');
 
-    <!-- 수동 이동 버튼 -->
-    <p><a href="https://youtu.be/id" target="_blank">직접 보기</a></p>
-  </body>
+        function updateCarousel() {
+            if (isTransitioning) return;
+            
+            isTransitioning = true;
+            
+            // 모바일 여부 확인
+            const isMobile = window.innerWidth <= 768;
+            
+            slides.forEach((slide, index) => {
+                const slideContent = slide.querySelector('.slide-content');
+                
+                // 직접 스타일을 적용하여 정확한 위치 제어
+                if (index === currentSlide) {
+                    // 활성 슬라이드 - 중앙, 큰 크기
+                    slide.style.width = isMobile ? '350px' : '600px';
+                    slide.style.height = isMobile ? '250px' : '350px';
+                    slide.style.transform = 'translateX(0) scale(1)';
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '10';
+                    slide.style.filter = 'brightness(1)';
+                    slide.style.pointerEvents = 'auto';
+                    if (slideContent) slideContent.style.opacity = '1';
+                } else if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
+                    // 이전 슬라이드 - 왼쪽, 작은 크기
+                    slide.style.width = isMobile ? '200px' : '300px';
+                    slide.style.height = isMobile ? '150px' : '220px';
+                    slide.style.transform = isMobile ? 'translateX(-150px) scale(0.8)' : 'translateX(-350px) scale(0.85)';
+                    slide.style.opacity = '0.7';
+                    slide.style.zIndex = '5';
+                    slide.style.filter = 'brightness(0.8)';
+                    slide.style.pointerEvents = 'auto';
+                    if (slideContent) slideContent.style.opacity = '0';
+                } else if (index === (currentSlide + 1) % totalSlides) {
+                    // 다음 슬라이드 - 오른쪽, 작은 크기
+                    slide.style.width = isMobile ? '200px' : '300px';
+                    slide.style.height = isMobile ? '150px' : '220px';
+                    slide.style.transform = isMobile ? 'translateX(150px) scale(0.8)' : 'translateX(350px) scale(0.85)';
+                    slide.style.opacity = '0.7';
+                    slide.style.zIndex = '5';
+                    slide.style.filter = 'brightness(0.8)';
+                    slide.style.pointerEvents = 'auto';
+                    if (slideContent) slideContent.style.opacity = '0';
+                } else {
+                    // 숨겨진 슬라이드
+                    slide.style.width = isMobile ? '200px' : '300px';
+                    slide.style.height = isMobile ? '150px' : '220px';
+                    slide.style.transform = 'translateX(0) scale(0.5)';
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '1';
+                    slide.style.filter = 'brightness(0.8)';
+                    slide.style.pointerEvents = 'none';
+                    if (slideContent) slideContent.style.opacity = '0';
+                }
+            });
+            
+            // 인디케이터 업데이트
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+            
+            // 카운터 업데이트
+            currentCounter.textContent = currentSlide + 1;
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 600);
+        }
+
+        function nextSlide() {
+            if (isTransitioning) return;
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function prevSlide() {
+            if (isTransitioning) return;
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function goToSlide(index) {
+            if (index === currentSlide || isTransitioning) return;
+            currentSlide = index;
+            updateCarousel();
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                if (!isTransitioning) {
+                    nextSlide();
+                }
+            }, 5000);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        // 좌우 이미지 클릭으로 슬라이드 이동
+        slides.forEach((slide, index) => {
+            slide.addEventListener('click', () => {
+                if (isTransitioning) return;
+                
+                if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
+                    prevSlide();
+                } else if (index === (currentSlide + 1) % totalSlides) {
+                    nextSlide();
+                }
+            });
+        });
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', (e) => {
+            if (isTransitioning) return;
+            
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+
+        // 터치 이벤트 (모바일)
+        let startX = 0;
+        let endX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            if (isTransitioning) return;
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            if (isTransitioning) return;
+            
+            endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+
+        // 마우스 호버시 자동 슬라이드 정지
+        const carousel = document.querySelector('.carousel-container');
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            startAutoSlide();
+        });
+
+        // 초기화
+        startAutoSlide();
+        updateCarousel();
+    </script>
+</body>
 </html>
