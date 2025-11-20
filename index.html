@@ -98,7 +98,7 @@
         // 유튜브 API가 준비되면 호출되는 함수
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                videoId: 'WghVNdAEmYE', // 영상 ID만 입력 (URL 파라미터 제거)
+                videoId: 'gzuEGoFlxP8', // 영상 ID만 입력 (URL 파라미터 제거)
                 playerVars: {
                     'autoplay': 1,        // 자동재생
                     'mute': 1,           // 음소거 (자동재생을 위해 필수)
@@ -110,7 +110,7 @@
                     'modestbranding': 1, // 유튜브 로고 최소화
                     'playsinline': 1,    // iOS에서 인라인 재생
                     'start': 0,          // 시작 시간
-                    'playlist': 'WghVNdAEmYE' // 루프를 위한 플레이리스트 설정
+                    'playlist': 'gzuEGoFlxP8' // 루프를 위한 플레이리스트 설정
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -160,17 +160,16 @@
       <article class="availableNow-wrap">
         <div class="availableNow-back">
           <h5 class="availableNow-subTitle">Coming in</h5>
-          <h2 class="availableNow-title">3Q 2026</h2>
+          <h2 class="availableNow-title">4Q 2026</h2>
           <P class="availableNow-text">
             <span class="availableNow-text-ko">"Master strategy, strike the battlefield."<br>
             next-level strategy RPG!</span> <br>
           </P>
         </div>
       </article>
-      <!--
         <div class="steam-widget">
-           <iframe src="https://store.steampowered.com/widget/1603720/" frameborder="0" width="100%" height="190"></iframe>
-        </div> -->
+           <iframe src="https://store.steampowered.com/widget/4139140/" frameborder="0" width="100%" height="190"></iframe>
+        </div>
     </section>
 
 
@@ -264,7 +263,14 @@
         <h2 class="subTitleWithLine">TRAILER</h2>
         
         <div class="otherVideoGrid-container">
-            <iframe width="1080" height="608" src="https://www.youtube.com/embed/EtBd31q5aXI" 
+            <iframe width="1080" height="608" src="https://www.youtube.com/embed/PDmXKWFnyPI" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+        <div class="otherVideoGrid-container">
+            <iframe width="1080" height="608" src="https://www.youtube.com/embed/DyAwh8b3Njg" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
